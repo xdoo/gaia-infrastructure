@@ -49,10 +49,10 @@ import java.util.stream.Collectors;
 @EnableResourceServer
 @EnableEurekaClient
 @Configuration
-@EntityScan(basePackages = {"de.muenchen.auth"})
-@EnableJpaRepositories(basePackages = {"de.muenchen.auth"})
+@EntityScan(basePackages = {"de.muenchen.gaia.auth"})
+@EnableJpaRepositories(basePackages = {"de.muenchen.gaia.auth"})
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"de.muenchen.service", "de.muenchen.auth"})
+@ComponentScan(basePackages = {"de.muenchen.service", "de.muenchen.gaia.auth"})
 public class AuthserverApplication extends WebMvcConfigurerAdapter {
 
 
