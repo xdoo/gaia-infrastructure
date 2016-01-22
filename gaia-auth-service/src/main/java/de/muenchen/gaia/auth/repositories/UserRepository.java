@@ -5,7 +5,7 @@
  */
 package de.muenchen.gaia.auth.repositories;
 
-import de.muenchen.gaia.auth.UpdateOwnUserValidator;
+import de.muenchen.auth.UpdateOwnUserValidator;
 import de.muenchen.gaia.auth.entities.User;
 import de.muenchen.service.TenantService;
 import org.springframework.cache.annotation.CacheEvict;

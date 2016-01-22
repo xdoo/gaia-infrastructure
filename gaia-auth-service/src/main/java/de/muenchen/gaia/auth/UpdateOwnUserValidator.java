@@ -1,4 +1,4 @@
-package de.muenchen.gaia.auth;
+package de.muenchen.auth;
 
 import de.muenchen.gaia.auth.entities.User;
 import de.muenchen.gaia.auth.repositories.UserRepository;

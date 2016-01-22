@@ -5,7 +5,6 @@ import de.muenchen.gaia.auth.entities.Permission;
 import de.muenchen.gaia.auth.mapper.UserMapper;
 import de.muenchen.gaia.auth.repositories.PermissionRepository;
 import de.muenchen.gaia.auth.repositories.UserRepository;
-import de.muenchen.gaia.auth.entities.User;
 import de.muenchen.service.security.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +38,7 @@ public class UserDetailsService implements org.springframework.security.core.use
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        User user = userRepository.findFirstByUsername(username);
+        de.muenchen.gaia.auth.entities.User user = userRepository.findFirstByUsername(username);
         if (user == null) {
             return null;
         }
