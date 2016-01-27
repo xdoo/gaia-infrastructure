@@ -1,7 +1,6 @@
 package de.muenchen.gaia.auth;
 
 import de.muenchen.gaia.auth.configurator.JDBCAuthenticationConfigurator;
-import de.muenchen.service.security.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -130,7 +129,7 @@ public class AuthserverApplication extends WebMvcConfigurerAdapter {
         public JwtAccessTokenConverter jwtAccessTokenConverter() {
             JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
             DefaultAccessTokenConverter accessTokenConverter = new DefaultAccessTokenConverter();
-            accessTokenConverter.setUserTokenConverter(new CustomDefaultUserAuthenticationConverter());
+            accessTokenConverter.setUserTokenConverter(new DefaultUserAuthenticationConverter());
             converter.setAccessTokenConverter(accessTokenConverter);
             converter.setSigningKey(signingKey);
             return converter;
@@ -157,19 +156,6 @@ public class AuthserverApplication extends WebMvcConfigurerAdapter {
                 throws Exception {
             oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess(
                     "isAuthenticated()");
-        }
-
-
-        class CustomDefaultUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
-            @Override
-            public Map<String, ?> convertUserAuthentication(Authentication authentication) {
-                Map<String, Object> properties = (Map<String, Object>) super.convertUserAuthentication(authentication);
-                Object principal = authentication.getPrincipal();
-                if (principal instanceof UserInfo) {
-                    properties.put(UserInfo.TENANT, ((UserInfo) principal).getTenant());
-                }
-                return properties;
-            }
         }
     }
 }
