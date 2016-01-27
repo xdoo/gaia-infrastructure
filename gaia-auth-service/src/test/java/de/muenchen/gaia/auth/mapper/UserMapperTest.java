@@ -1,6 +1,5 @@
 package de.muenchen.gaia.auth.mapper;
 
-import de.muenchen.gaia.auth.dto.AuthorityDto;
 import de.muenchen.gaia.auth.dto.UserDto;
 import de.muenchen.gaia.auth.entities.Authority;
 import de.muenchen.gaia.auth.entities.Permission;
@@ -36,17 +35,15 @@ public class UserMapperTest {
     @Test
     public void testUserToUserDtoWithOneAuthorityAndPermission() throws Exception {
         final User user = createUser();
+        // UserDto only contains Permissions not Roles
         final UserDto userDto = UserMapper.INSTANCE.userToUserDto(user);
         assertEquals(user.getBirthdate(), userDto.getBirthdate());
         assertEquals(user.getEmail(), userDto.getEmail());
         assertEquals(user.getForname(), userDto.getForname());
         assertEquals(user.getSurname(), userDto.getSurname());
         assertEquals(user.getAuthorities().size(), userDto.getAuthorities().size());
-        Authority auth = user.getAuthorities().iterator().next();
-        AuthorityDto authDto = userDto.getAuthorities().iterator().next();
-        assertEquals(auth.getAuthority(), authDto.getAuthority());
         final List<String> permissions = reducePermissions(user);
-        assertArrayEquals("Authorities mapped not correct.", permissions.toArray(), authDto.getPermissions().toArray());
+        assertArrayEquals("Authorities mapped not correct.", permissions.toArray(), userDto.getAuthorities().toArray());
     }
 
     private List<String> reducePermissions(User user) {
@@ -56,13 +53,15 @@ public class UserMapperTest {
     @Test
     public void testUserToUserInfo() {
         final User user = createUser();
+        // UserInfo only contains Roles not Permissions
         final UserInfo userInfo = UserMapper.INSTANCE.userToUserInfo(user);
         assertEquals(user.getUsername(), userInfo.getUsername());
         assertEquals(user.getMandant(), userInfo.getTenant());
         assertEquals(user.getPassword(), userInfo.getPassword());
-        final List<String> permissions = reducePermissions(user);
-        final List<String> authorities = userInfo.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-        assertArrayEquals("Authorities mapped not correct.", permissions.toArray(), authorities.toArray());
+
+        final List<String> authoritiesFromUser = user.getAuthorities().stream().map(Authority::getAuthority).collect(Collectors.toList());
+        final List<String> authoritiesFromUserInfo = userInfo.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+        assertArrayEquals("Authorities mapped not correct.", authoritiesFromUser.toArray(), authoritiesFromUserInfo.toArray());
     }
 
     private User createUser() {

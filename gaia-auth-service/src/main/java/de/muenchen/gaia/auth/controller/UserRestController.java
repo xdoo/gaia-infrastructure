@@ -44,7 +44,7 @@ public class UserRestController {
             all.setPermissions(new ArrayList<>());
             all.setAuthority("all");
             allPermissions.forEach(permission -> all.getPermissions().add(permission.getPermission()));
-            dto.getAuthorities().add(all);
+            dto.getAuthorities().addAll(all.getPermissions());
         }
         return dto;
     }
