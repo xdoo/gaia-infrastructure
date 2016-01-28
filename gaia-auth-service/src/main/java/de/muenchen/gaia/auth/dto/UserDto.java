@@ -20,8 +20,6 @@ public class UserDto {
 
     private boolean userEnabled;
 
-    private String mandant;
-
     private Set<AuthorityDto> authorities;
 
     public String getUsername() {
@@ -78,13 +76,5 @@ public class UserDto {
 
     public void setAuthorities(Set<AuthorityDto> authorities) {
         this.authorities = authorities;
-    }
-
-    public String getMandant() {
-        return mandant;
-    }
-
-    public void setMandant(String mandant) {
-        this.mandant = mandant;
     }
 }
