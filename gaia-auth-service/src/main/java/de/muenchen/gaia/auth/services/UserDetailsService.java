@@ -5,13 +5,12 @@ import de.muenchen.gaia.auth.entities.Permission;
 import de.muenchen.gaia.auth.mapper.UserMapper;
 import de.muenchen.gaia.auth.repositories.PermissionRepository;
 import de.muenchen.gaia.auth.repositories.UserRepository;
-
+import de.muenchen.service.security.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -43,13 +42,13 @@ public class UserDetailsService implements org.springframework.security.core.use
         if (user == null) {
             return null;
         }
-        User userInfo;
+        UserInfo userInfo;
         if (user.getAuthorities().stream().anyMatch(authority -> authority.getAuthority().equals(Authority.ADMIN_AUTHORITY))) {
             // The authority ADMIN gets automatically all permissions. Hence no service needs to map the permissions manual.
             log.debug("User {} has authority {}", username, Authority.ADMIN_AUTHORITY);
             final Iterable<Permission> all = permissionRepository.findAll();
             Set<GrantedAuthority> authorities = StreamSupport.stream(all.spliterator(), false).map(p -> new SimpleGrantedAuthority(p.getPermission())).collect(Collectors.toSet());
-            userInfo = new User(user.getUsername(), user.getPassword(), authorities);
+            userInfo = new UserInfo(user.getUsername(), user.getPassword(), user.getMandant(), authorities);
         } else {
             userInfo = mapper.userToUserInfo(user);
         }

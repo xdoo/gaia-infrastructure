@@ -34,6 +34,7 @@ public class UserMapperImpl extends UserMapper {
         userDto.setEmail( user.getEmail() );
         userDto.setUserEnabled( user.isUserEnabled() );
         userDto.setAuthorities( authoritiesToAuthorities( user.getAuthorities() ) );
+        userDto.setMandant( user.getMandant() );
 
         return userDto;
     }

@@ -5,6 +5,7 @@ import de.muenchen.gaia.auth.dto.UserDto;
 import de.muenchen.gaia.auth.entities.Authority;
 import de.muenchen.gaia.auth.entities.Permission;
 import de.muenchen.gaia.auth.entities.User;
+import de.muenchen.service.security.UserInfo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -29,8 +30,8 @@ public abstract class UserMapper {
         return permission.getPermission();
     }
 
-    public org.springframework.security.core.userdetails.User userToUserInfo(User user) {
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authoritiesToGrantedAuthorities(user.getAuthorities()));
+    public UserInfo userToUserInfo(User user) {
+        return new UserInfo(user.getUsername(), user.getPassword(), user.getMandant(), authoritiesToGrantedAuthorities(user.getAuthorities()));
     }
 
     public Set<GrantedAuthority> authoritiesToGrantedAuthorities(Set<Authority> authorities) {
