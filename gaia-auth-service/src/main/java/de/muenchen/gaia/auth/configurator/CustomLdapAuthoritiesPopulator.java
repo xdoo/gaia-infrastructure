@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class CustomLdapAuthoritiesPopulator implements LdapAuthoritiesPopulator {
 
     public static final String QUERY =
-            "SELECT _PERMISSIONS.PERM_PERMISSION " +
+            "SELECT _AUTHORITIES.AUTH_AUTHORITIES " +
                     "FROM _USERS_AUTHORITIES " +
                     "JOIN _USERS on _USERS_AUTHORITIES.USER_OID = _USERS.OID " +
                     "JOIN _AUTHORITIES on _USERS_AUTHORITIES.AUTHORITY_OID  = _AUTHORITIES.OID " +

@@ -22,6 +22,7 @@ server:
 security:
  oauth2:
   client:
+# see org.springframework.boot.autoconfigure.security.oauth2.OAuth2ClientProperties for more Informations
    scope: openid
    id: acme
   jwt.signingKey: secret

@@ -20,7 +20,7 @@ public abstract class UserMapper {
 
     public abstract UserDto userToUserDto(User user);
 
-    public abstract Set<AuthorityDto> authoritiesToAuthorities(Set<Authority> authorities);
+    public abstract Set<String> authoritiesToAuthorities(Set<Authority> authorities);
 
     public abstract AuthorityDto authorityToAuthorityDto(Authority authority);
 
@@ -35,6 +35,7 @@ public abstract class UserMapper {
     }
 
     public Set<GrantedAuthority> authoritiesToGrantedAuthorities(Set<Authority> authorities) {
-        return authorities.stream().flatMap(authority -> authority.getPermissions().stream()).map(permission -> new SimpleGrantedAuthority(permission.getPermission())).collect(Collectors.toSet());
+        //return authorities.stream().flatMap(authority -> authority.getPermissions().stream()).map(permission -> new SimpleGrantedAuthority(permission.getPermission())).collect(Collectors.toSet());
+        return authorities.stream().map(authority -> new SimpleGrantedAuthority(authority.getAuthority())).collect(Collectors.toSet());
     }
 }

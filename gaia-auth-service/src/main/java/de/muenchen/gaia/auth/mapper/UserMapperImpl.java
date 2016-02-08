@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
@@ -40,17 +41,12 @@ public class UserMapperImpl extends UserMapper {
     }
 
     @Override
-    public Set<AuthorityDto> authoritiesToAuthorities(Set<Authority> authorities) {
+    public Set<String> authoritiesToAuthorities(Set<Authority> authorities) {
         if ( authorities == null ) {
             return null;
         }
 
-        Set<AuthorityDto> set_ = new HashSet<AuthorityDto>();
-        for ( Authority authority : authorities ) {
-            set_.add( authorityToAuthorityDto( authority ) );
-        }
-
-        return set_;
+        return authorities.stream().flatMap(authority -> authority.getPermissions().stream()).map(permission -> permission.getPermission()).collect(Collectors.toSet());
     }
 
     @Override

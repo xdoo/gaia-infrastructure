@@ -1,23 +1,15 @@
 package de.muenchen.gaia.auth.services;
 
-import de.muenchen.gaia.auth.entities.Authority;
-import de.muenchen.gaia.auth.entities.Permission;
 import de.muenchen.gaia.auth.mapper.UserMapper;
-import de.muenchen.gaia.auth.repositories.PermissionRepository;
+import de.muenchen.gaia.auth.repositories.AuthorityRepository;
 import de.muenchen.gaia.auth.repositories.UserRepository;
 import de.muenchen.service.security.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Created by huningd on 17.12.15.
@@ -31,7 +23,7 @@ public class UserDetailsService implements org.springframework.security.core.use
     private UserRepository userRepository;
 
     @Autowired
-    private PermissionRepository permissionRepository;
+    private AuthorityRepository authorityRepository;
 
     private UserMapper mapper = UserMapper.INSTANCE;
 
@@ -40,18 +32,10 @@ public class UserDetailsService implements org.springframework.security.core.use
             throws UsernameNotFoundException {
         de.muenchen.gaia.auth.entities.User user = userRepository.findFirstByUsername(username);
         if (user == null) {
-            return null;
+            throw new UsernameNotFoundException(String.format("User %S not found!", username));
         }
         UserInfo userInfo;
-        if (user.getAuthorities().stream().anyMatch(authority -> authority.getAuthority().equals(Authority.ADMIN_AUTHORITY))) {
-            // The authority ADMIN gets automatically all permissions. Hence no service needs to map the permissions manual.
-            log.debug("User {} has authority {}", username, Authority.ADMIN_AUTHORITY);
-            final Iterable<Permission> all = permissionRepository.findAll();
-            Set<GrantedAuthority> authorities = StreamSupport.stream(all.spliterator(), false).map(p -> new SimpleGrantedAuthority(p.getPermission())).collect(Collectors.toSet());
-            userInfo = new UserInfo(user.getUsername(), user.getPassword(), user.getMandant(), authorities);
-        } else {
-            userInfo = mapper.userToUserInfo(user);
-        }
+        userInfo = mapper.userToUserInfo(user);
         return userInfo;
     }
 
