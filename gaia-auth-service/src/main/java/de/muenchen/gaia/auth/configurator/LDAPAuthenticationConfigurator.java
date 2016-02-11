@@ -2,6 +2,7 @@ package de.muenchen.gaia.auth.configurator;
 
 import org.kohsuke.MetaInfServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,7 +13,8 @@ import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
  * Created by rene.zarwel on 21.08.15.
  */
 @MetaInfServices
-@Order(3)
+@Order(1)
+@Configuration
 public class LDAPAuthenticationConfigurator extends GlobalAuthenticationConfigurerAdapter {
 
     private final static String USER_SEARCH_BASE = "o=Landeshauptstadt München,c=de";

@@ -1,6 +1,7 @@
 package de.muenchen.gaia.auth;
 
 import de.muenchen.gaia.auth.configurator.JDBCAuthenticationConfigurator;
+import de.muenchen.gaia.auth.configurator.LDAPAuthenticationConfigurator;
 import de.muenchen.service.security.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -78,6 +79,12 @@ public class AuthserverApplication extends WebMvcConfigurerAdapter {
     @Bean
     public GlobalAuthenticationConfigurerAdapter configurationAdapter1() {
         return new JDBCAuthenticationConfigurator();
+    }
+
+    // LDAP-Security
+    @Bean
+    public GlobalAuthenticationConfigurerAdapter configurationAdapter2() {
+        return new LDAPAuthenticationConfigurator();
     }
 
     @Configuration
