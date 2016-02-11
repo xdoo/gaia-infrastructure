@@ -2,7 +2,6 @@ package de.muenchen.gaia.auth;
 
 import de.muenchen.gaia.auth.configurator.JDBCAuthenticationConfigurator;
 import de.muenchen.gaia.auth.configurator.LDAPAuthenticationConfigurator;
-import de.muenchen.service.security.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -172,9 +171,6 @@ public class AuthserverApplication extends WebMvcConfigurerAdapter {
             public Map<String, ?> convertUserAuthentication(Authentication authentication) {
                 Map<String, Object> properties = (Map<String, Object>) super.convertUserAuthentication(authentication);
                 Object principal = authentication.getPrincipal();
-                if (principal instanceof UserInfo) {
-                    properties.put(UserInfo.TENANT, ((UserInfo) principal).getTenant());
-                }
                 return properties;
             }
         }

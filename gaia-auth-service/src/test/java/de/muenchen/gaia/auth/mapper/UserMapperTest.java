@@ -56,7 +56,6 @@ public class UserMapperTest {
         // UserInfo only contains Roles not Permissions
         final UserInfo userInfo = UserMapper.INSTANCE.userToUserInfo(user);
         assertEquals(user.getUsername(), userInfo.getUsername());
-        assertEquals(user.getMandant(), userInfo.getTenant());
         assertEquals(user.getPassword(), userInfo.getPassword());
 
         final List<String> authoritiesFromUser = user.getAuthorities().stream().map(Authority::getAuthority).collect(Collectors.toList());

@@ -31,7 +31,7 @@ public abstract class UserMapper {
     }
 
     public UserInfo userToUserInfo(User user) {
-        return new UserInfo(user.getUsername(), user.getPassword(), user.getMandant(), authoritiesToGrantedAuthorities(user.getAuthorities()));
+        return new UserInfo(user.getUsername(), user.getPassword(), authoritiesToGrantedAuthorities(user.getAuthorities()));
     }
 
     public Set<GrantedAuthority> authoritiesToGrantedAuthorities(Set<Authority> authorities) {
