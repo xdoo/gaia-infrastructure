@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.authentication.configurers
  * Created by huningd on 17.12.15.
  */
 @MetaInfServices
-@Order(1)
+@Order(3)
 @Configuration
 public class CustomUserDetailServiceAuthenticationConfigurator extends GlobalAuthenticationConfigurerAdapter {
 

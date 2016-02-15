@@ -2,6 +2,7 @@ package de.muenchen.gaia.auth.configurator;
 
 import org.kohsuke.MetaInfServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
@@ -13,6 +14,7 @@ import javax.sql.DataSource;
  */
 @MetaInfServices
 @Order(2)
+@Configuration
 public class JDBCAuthenticationConfigurator extends GlobalAuthenticationConfigurerAdapter {
 
     @Autowired
