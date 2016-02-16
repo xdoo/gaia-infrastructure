@@ -9,7 +9,7 @@
     <modules>
         <module>infrastructure-service-registry</module>
         <module>infrastructure-service-auth</module>
-        <module>gaia-config-service</module>
+        <module>infrastructure-service-config</module>
     </modules>
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>

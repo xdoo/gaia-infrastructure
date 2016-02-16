@@ -1,4 +1,4 @@
-package de.muenchen.gaia.configcloud;
+package de.muenchen.itm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
