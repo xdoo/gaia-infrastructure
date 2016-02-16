@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>gaia-discovery-service</module>
+        <module>infrastructure-service-registry</module>
         <module>infrastructure-service-auth</module>
         <module>gaia-config-service</module>
     </modules>

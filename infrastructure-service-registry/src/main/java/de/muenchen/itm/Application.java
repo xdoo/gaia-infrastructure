@@ -1,4 +1,4 @@
-package de.muenchen.gaia.discovery;
+package de.muenchen.itm;
 
 
 import org.springframework.boot.SpringApplication;
@@ -6,21 +6,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
- * The Eureka Server for all Services. 
- * Configure it in resources/application.properties. 
+ * The Eureka Server for all Services.
+ * Configure it in resources/application.properties.
  * (Port and Location can be found there)
- * 
+ *
  * @author p.mueller maximilian.zollbrecht
  */
 @SpringBootApplication
 @EnableEurekaServer
 public class Application {
-    
+
     /**
      * Start the Eureka-Server.
-     * 
+     *
      * @param args
-     * @throws Exception 
+     * @throws Exception
      */
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
