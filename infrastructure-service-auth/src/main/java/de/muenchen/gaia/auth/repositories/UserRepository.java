@@ -13,7 +13,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -27,13 +26,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     String ROLE_WRITE = "hasRole('ROLE_WRITE_SEC_User')";
     String ROLE_DELETE = "hasRole('ROLE_DELETE_SEC_User')";
 
-    /**
-     * Used by Tenant-Service. Not exported due to security-reasons. Tenant-Filtering leads to circulating calls.
-     *
-     * @param username
-     * @return
-     */
-    @RestResource(exported = false)
     @Cacheable(value = User_CACHE, key = "#p0")
     User findFirstByUsername(@Param("username") String username);
 

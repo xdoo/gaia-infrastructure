@@ -39,7 +39,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -136,7 +135,7 @@ public class AuthserverApplication extends WebMvcConfigurerAdapter {
         public JwtAccessTokenConverter jwtAccessTokenConverter() {
             JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
             DefaultAccessTokenConverter accessTokenConverter = new DefaultAccessTokenConverter();
-            accessTokenConverter.setUserTokenConverter(new CustomDefaultUserAuthenticationConverter());
+            accessTokenConverter.setUserTokenConverter(new DefaultUserAuthenticationConverter());
             converter.setAccessTokenConverter(accessTokenConverter);
             converter.setSigningKey(signingKey);
             return converter;
@@ -163,16 +162,6 @@ public class AuthserverApplication extends WebMvcConfigurerAdapter {
                 throws Exception {
             oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess(
                     "isAuthenticated()");
-        }
-
-
-        class CustomDefaultUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
-            @Override
-            public Map<String, ?> convertUserAuthentication(Authentication authentication) {
-                Map<String, Object> properties = (Map<String, Object>) super.convertUserAuthentication(authentication);
-                Object principal = authentication.getPrincipal();
-                return properties;
-            }
         }
     }
 }

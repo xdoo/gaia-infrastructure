@@ -24,7 +24,9 @@ security:
   client:
 # see org.springframework.boot.autoconfigure.security.oauth2.OAuth2ClientProperties for more Informations
    scope: openid
-   id: acme
+   id: gaia-gui
+   client-secret: 0fea6d10f7d810f0f4ea4d8649cfa8ac7c9db02aa6dc9474882be5d96f1407c1
+#TODO Get a Keystore
   jwt.signingKey: secret
 
 

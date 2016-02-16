@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>gaia-discovery-service</module>
-        <module>gaia-auth-service</module>
+        <module>infrastructure-service-auth</module>
         <module>gaia-config-service</module>
     </modules>
     <properties>

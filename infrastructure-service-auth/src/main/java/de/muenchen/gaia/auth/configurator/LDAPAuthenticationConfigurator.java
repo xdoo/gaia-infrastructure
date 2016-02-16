@@ -21,7 +21,7 @@ public class LDAPAuthenticationConfigurator extends GlobalAuthenticationConfigur
 
     private final static String USER_SEARCH_FILTER = "(&(objectClass=inetOrgPerson)(uid={0}))";
 
-    private final static String CONTEXT_SOURCE = "ldap://ldap01.muenchen.de:389";
+    private final static String CONTEXT_SOURCE = "ldap://10.160.96.16:389";
 
     @Autowired
     private CustomLdapAuthoritiesPopulator authPopulator;
