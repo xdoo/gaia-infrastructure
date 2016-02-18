@@ -1,4 +1,4 @@
-package de.muenchen.gaia.hystrix.simple;
+package de.muenchen.gaia.hystrix;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
