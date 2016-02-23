@@ -7,7 +7,7 @@
         <version>Brixton.M4</version>
         <relativePath />
     </parent>
-    <artifactId>gaia-hystrix-dashboard-service</artifactId>
+    <artifactId>infrastructure-service-hystrix</artifactId>
     <groupId>de.muenchen</groupId>
     <name>gaia :: hystrix dashboard service</name>
     

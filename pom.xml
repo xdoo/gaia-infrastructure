@@ -9,7 +9,7 @@
         <module>gaia-discovery-service</module>
         <module>gaia-auth-service</module>
         <module>gaia-config-service</module>
-        <module>gaia-hystrix-dashboard-service</module>
+        <module>infrastructure-service-hystrix</module>
     </modules>
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
